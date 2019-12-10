@@ -2,9 +2,9 @@ require 'prawn/qrcode'
 require 'prawn/measurement_extensions'
 
 def generate_qr_code_and_render_in_pdf
-  pdf = Prawn::Document.new(page_size: [40.mm, 30.mm], margin: [10,10,10,10])
+  pdf = Prawn::Document.new(page_size: [40.mm, 25.mm], margin: [10,10,10,10])
   pdf.font_size 8
-  array = %w[IronJokerJohnJoelTim Joker John Joel Tim Hydra Phenix Nick Pokemon]
+  array = %w[Iron Joker John Joel Tim Hydra Phenix Nick Pokemon]
   array.each do |row|
     puts "generating QR code for: #{row}"
     qrcode_content = row
@@ -12,7 +12,7 @@ def generate_qr_code_and_render_in_pdf
       qrcode = RQRCode::QRCode.new(row, level: :h, size: 1)
       pdf.move_down(5)
       pdf.render_qr_code(qrcode, dot: 1.2, align: :left)
-      pdf.move_up(40)
+      pdf.move_up(20)
       pdf.indent(55) do
         pdf.text qrcode_content
       end
